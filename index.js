@@ -1,7 +1,8 @@
 const ejs = require("ejs");
 const watch = require("node-watch");
 
-// ejs.settings.root = "./ejs";  
+//Root path include css, js folders
+const publicPath = ".";
 
 var posts = [
   { title: "Post 1", content: "Content 1" },
@@ -12,12 +13,13 @@ watch("./ejs", { recursive: true }, function (evt, name) {
   render();
 });
 
-function render(){
+function render() {
   ejs.renderFile(
     "./ejs/index.ejs",
     {
       title: "Blog Posts",
       posts: posts,
+      publicPath,
     },
     (err, html) => {
       const htmlFilePath = "index.html";
